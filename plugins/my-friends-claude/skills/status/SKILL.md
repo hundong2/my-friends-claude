@@ -32,11 +32,17 @@ When this skill is invoked:
   • PreToolUse — 도구 사용 피드백
   • Notification — 알림 커스터마이즈
 
+✽ 스피너 동사:
+  활성화: {spinnerVerbs.enabled}
+  동사 수: {spinnerVerbs.verbs 배열 길이}개
+  적용 상태: ~/.claude/settings.json에 spinnerVerbs 키 존재 여부 확인
+
 🎯 사용 가능한 명령:
-  /my-friends-claude:set-style    — 스타일 변경
-  /my-friends-claude:show-config  — 설정 조회
-  /my-friends-claude:set-message  — 메시지 변경
-  /my-friends-claude:status       — 이 대시보드
+  /my-friends-claude:set-style      — 스타일 변경
+  /my-friends-claude:show-config    — 설정 조회
+  /my-friends-claude:set-message    — 메시지 변경
+  /my-friends-claude:apply-spinner  — 스피너 동사 적용/원복
+  /my-friends-claude:status         — 이 대시보드
 ```
 
 Use Glob to find style files and Read to get config values.

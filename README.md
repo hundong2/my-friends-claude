@@ -39,16 +39,18 @@ claude --plugin-dir ./my-friends-claude/plugins/my-friends-claude
 | 5 | **도구 사용 피드백** | git push 경고, 테스트 결과 메시지 등 |
 | 6 | **알림** | 데스크톱 알림 제목 커스터마이즈 |
 | 7 | **기본 행동 규칙** | 지속적 행동 지침 |
+| 8 | **스피너 동사** | "✽ Effecting…" 등 로딩 문구를 한국어로 변경 |
 
 ## 사용법 (Usage)
 
 ### 슬래시 커맨드
 
 ```
-/my-friends-claude:show-config     # 현재 설정 조회
-/my-friends-claude:set-style       # 스타일 변경
-/my-friends-claude:set-message     # 메시지 변경
-/my-friends-claude:status          # 플러그인 상태 대시보드
+/my-friends-claude:show-config      # 현재 설정 조회
+/my-friends-claude:set-style        # 스타일 변경
+/my-friends-claude:set-message      # 메시지 변경
+/my-friends-claude:apply-spinner    # 스피너 동사 적용/원복
+/my-friends-claude:status           # 플러그인 상태 대시보드
 ```
 
 ### 스타일 종류
@@ -56,6 +58,29 @@ claude --plugin-dir ./my-friends-claude/plugins/my-friends-claude
 - **friendly-korean** — 친구같은 한국어 스타일 (반말, 이모지, 친근한 톤)
 - **concise** — 간결한 스타일 (존댓말, 핵심만 전달, 이모지 없음)
 - **mentor** — 멘토 스타일 (존댓말, 설명 중심, 학습 유도)
+
+### 스피너 동사 커스터마이즈
+
+Claude Code가 작업 중 표시하는 `✽ Effecting…`, `✽ Thinking…` 같은 스피너 문구를 한국어로 바꿀 수 있습니다.
+
+```
+/my-friends-claude:apply-spinner          # 한국어 스피너 적용
+/my-friends-claude:apply-spinner restore  # 원본 영어로 복원
+```
+
+적용 후 Claude Code를 재시작하면 `✽ 생각하는중…`, `✽ 만드는중…` 등으로 표시됩니다.
+
+원본 56개 동사와 한국어 대응은 `config/config.json`의 `spinnerVerbs._original_mapping`에 정리되어 있습니다.
+
+| 원본 (영어) | 한국어 | 의미 |
+|-------------|--------|------|
+| Thinking | 생각하는중 | 기본 사고 동작 |
+| Working | 열심히하는중 | 작업 수행 |
+| Crafting | 만드는중 | 정성들여 제작 |
+| Cooking | 요리하는중 | 코드를 요리하는 비유 |
+| Clauding | 클로딩중 | Claude 고유 동사 |
+| Vibing | 느끼는중 | 분위기를 타는 슬랭 |
+| ... | ... | (총 56개, config.json 참조) |
 
 ### config.json 예시
 
@@ -96,6 +121,7 @@ my-friends-claude/
 │       │   ├── set-style/SKILL.md
 │       │   ├── show-config/SKILL.md
 │       │   ├── set-message/SKILL.md
+│       │   ├── apply-spinner/SKILL.md
 │       │   └── status/SKILL.md
 │       ├── hooks/                      # Hook 스크립트
 │       │   ├── hooks.json
@@ -115,11 +141,15 @@ my-friends-claude/
 ## 삭제 (Uninstall)
 
 ```
+# 1. 스피너를 적용했다면 먼저 원복
+/my-friends-claude:apply-spinner restore
+
+# 2. 플러그인 삭제
 /plugin uninstall my-friends-claude@my-friends-claude
 /plugin marketplace remove my-friends-claude
 ```
 
-플러그인을 삭제하면 Claude Code는 원래 상태로 돌아갑니다.
+> **참고**: 스피너 동사는 `~/.claude/settings.json`에 직접 기록되므로, 플러그인 삭제 전에 `apply-spinner restore`로 원복해주세요. 그 외 모든 커스터마이즈(hooks, styles, skills)는 플러그인 삭제 시 자동으로 원래 상태로 돌아갑니다.
 
 ## 의존성 (Dependencies)
 
