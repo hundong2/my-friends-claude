@@ -35,3 +35,5 @@ When this skill is invoked:
 - Changes require a Claude Code restart to take effect
 - The `_original_mapping` field in config.json is documentation only — do NOT write it to settings.json
 - Only write the `verbs` array values to settings.json
+- **자동 적용/원복**: 세션 시작 시 자동 적용, 세션 종료 시 자동 원복됩니다. 이 스킬은 수동으로 즉시 적용/원복할 때 사용하세요.
+- 자동 적용/원복은 `scripts/spinner-manage.sh`가 처리하며, `session-start.sh`와 `stop.sh` Hook에서 호출됩니다.

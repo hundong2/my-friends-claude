@@ -132,7 +132,8 @@ my-friends-claude/
 │       │   └── notification.sh
 │       ├── scripts/                    # 유틸리티 스크립트
 │       │   ├── statusline.sh
-│       │   └── read-config.sh
+│       │   ├── read-config.sh
+│       │   └── spinner-manage.sh
 │       └── rules/CLAUDE.md            # 기본 행동 규칙
 ├── LICENSE
 └── README.md
@@ -141,15 +142,11 @@ my-friends-claude/
 ## 삭제 (Uninstall)
 
 ```
-# 1. 스피너를 적용했다면 먼저 원복
-/my-friends-claude:apply-spinner restore
-
-# 2. 플러그인 삭제
 /plugin uninstall my-friends-claude@my-friends-claude
 /plugin marketplace remove my-friends-claude
 ```
 
-> **참고**: 스피너 동사는 `~/.claude/settings.json`에 직접 기록되므로, 플러그인 삭제 전에 `apply-spinner restore`로 원복해주세요. 그 외 모든 커스터마이즈(hooks, styles, skills)는 플러그인 삭제 시 자동으로 원래 상태로 돌아갑니다.
+스피너 동사는 세션 시작 시 자동 적용, 세션 종료 시 자동 원복됩니다. 플러그인을 삭제하면 다음 세션부터 hooks가 실행되지 않으므로 모든 커스터마이즈가 자동으로 원래 상태로 돌아갑니다.
 
 ## 의존성 (Dependencies)
 
