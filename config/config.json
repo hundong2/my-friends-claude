@@ -1,0 +1,30 @@
+{
+  "language": "ko",
+  "activeStyle": "friendly-korean",
+  "persona": {
+    "name": "친구 클로드",
+    "emoji": true
+  },
+  "messages": {
+    "session_start": "안녕! 오늘도 같이 열심히 해보자! 🚀",
+    "session_end": "오늘 수고했어! 다음에 또 만나자! 👋",
+    "working": "열심히 만드는중! 🔨",
+    "thinking": "음... 생각하는중... 🤔",
+    "error_occurred": "앗, 문제가 생겼어. 같이 해결해보자! 💪",
+    "task_complete": "완료! 다음은 뭘 해볼까? ✅",
+    "git_push_warning": "⚠️ 푸시하기 전에 한번 더 확인해볼까?",
+    "test_passed": "테스트 통과! 🎉",
+    "test_failed": "테스트 실패... 같이 고쳐보자! 🔧"
+  },
+  "statusLine": {
+    "show_model": true,
+    "show_git_branch": true,
+    "show_cost": true,
+    "show_context_remaining": true,
+    "custom_prefix": "친구"
+  },
+  "notifications": {
+    "title_prefix": "친구 클로드",
+    "sound": true
+  }
+}

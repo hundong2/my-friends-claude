@@ -1,0 +1,11 @@
+{
+  "name": "my-friends-claude",
+  "version": "1.0.0",
+  "description": "클로드 코드 문구 커스터마이즈 플러그인 — Customize Claude Code messages and UX",
+  "author": {
+    "name": "donghun2"
+  },
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "outputStyles": "./styles/"
+}

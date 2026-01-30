@@ -1,0 +1,29 @@
+{
+  "hooks": [
+    {
+      "event": "SessionStart",
+      "command": "./hooks/session-start.sh",
+      "description": "세션 시작 시 커스텀 인사말 출력"
+    },
+    {
+      "event": "UserPromptSubmit",
+      "command": "./hooks/prompt-submit.sh",
+      "description": "매 프롬프트마다 언어/페르소나 힌트 주입"
+    },
+    {
+      "event": "Stop",
+      "command": "./hooks/stop.sh",
+      "description": "세션 종료 시 마무리 인사"
+    },
+    {
+      "event": "PreToolUse",
+      "command": "./hooks/pre-tool-use.sh",
+      "description": "도구 사용 전 피드백 (git push 경고 등)"
+    },
+    {
+      "event": "Notification",
+      "command": "./hooks/notification.sh",
+      "description": "데스크톱 알림 제목 커스터마이즈"
+    }
+  ]
+}
