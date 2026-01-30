@@ -1,0 +1,28 @@
+{
+  "name": "my-friends-claude",
+  "owner": {
+    "name": "donghun2"
+  },
+  "metadata": {
+    "description": "클로드 코드 문구 커스터마이즈 마켓플레이스 — Customize Claude Code messages and UX",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "my-friends-claude",
+      "source": "./plugins/my-friends-claude",
+      "description": "클로드 코드의 응답 스타일, 인사말, 상태바, 페르소나를 커스터마이즈하는 플러그인",
+      "version": "1.0.0",
+      "author": {
+        "name": "donghun2"
+      },
+      "homepage": "https://github.com/hundong2/my-friends-claude",
+      "repository": "https://github.com/hundong2/my-friends-claude",
+      "license": "MIT",
+      "keywords": ["korean", "customization", "persona", "style", "hooks", "i18n"],
+      "category": "customization",
+      "tags": ["korean", "ux", "persona", "output-style"]
+    }
+  ]
+}

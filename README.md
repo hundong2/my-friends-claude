@@ -1,22 +1,31 @@
 # my-friends-claude 🤝
 
-Claude Code의 출력 문구와 UX를 커스터마이즈할 수 있는 플러그인입니다.
+Claude Code의 출력 문구와 UX를 커스터마이즈할 수 있는 플러그인 마켓플레이스입니다.
 `config.json` 하나만 수정하면 세션 인사말, 작업 메시지, 상태바, 응답 스타일 등을 원하는 문구로 바꿀 수 있습니다.
 
-A Claude Code plugin to customize messages and UX. Edit one `config.json` to change session greetings, status bar, response styles, and more.
+A Claude Code plugin marketplace to customize messages and UX. Edit one `config.json` to change session greetings, status bar, response styles, and more.
 
 ---
 
 ## 설치 (Installation)
 
-```bash
-# 플러그인 디렉토리에서 Claude Code 실행
-claude --plugin-dir ./my-friends-claude
+### 마켓플레이스로 설치 (권장)
+
+Claude Code 안에서 아래 명령을 실행하세요:
+
+```
+# 1. 마켓플레이스 추가
+/plugin marketplace add hundong2/my-friends-claude
+
+# 2. 플러그인 설치
+/plugin install my-friends-claude@my-friends-claude
 ```
 
-또는 프로젝트에 서브모듈로 추가:
+### 수동 설치
+
 ```bash
-git submodule add <repo-url> .claude-plugins/my-friends-claude
+git clone https://github.com/hundong2/my-friends-claude.git
+claude --plugin-dir ./my-friends-claude/plugins/my-friends-claude
 ```
 
 ## 커스터마이즈 가능한 영역
@@ -33,9 +42,7 @@ git submodule add <repo-url> .claude-plugins/my-friends-claude
 
 ## 사용법 (Usage)
 
-### 설정 변경
-
-`config/config.json`을 직접 편집하거나 슬래시 커맨드를 사용합니다:
+### 슬래시 커맨드
 
 ```
 /my-friends-claude:show-config     # 현재 설정 조회
@@ -75,29 +82,44 @@ git submodule add <repo-url> .claude-plugins/my-friends-claude
 
 ```
 my-friends-claude/
-├── .claude-plugin/plugin.json     # 플러그인 매니페스트
-├── config/config.json             # 메시지 설정 (사용자 편집 대상)
-├── styles/                        # Output Styles
-│   ├── friendly-korean.md
-│   ├── concise.md
-│   └── mentor.md
-├── skills/                        # 슬래시 커맨드
-│   ├── set-style/SKILL.md
-│   ├── show-config/SKILL.md
-│   ├── set-message/SKILL.md
-│   └── status/SKILL.md
-├── hooks/                         # Hook 스크립트
-│   ├── hooks.json
-│   ├── session-start.sh
-│   ├── prompt-submit.sh
-│   ├── stop.sh
-│   ├── pre-tool-use.sh
-│   └── notification.sh
-├── scripts/                       # 유틸리티 스크립트
-│   ├── statusline.sh
-│   └── read-config.sh
-└── rules/CLAUDE.md                # 기본 행동 규칙
+├── .claude-plugin/
+│   └── marketplace.json               # 마켓플레이스 매니페스트
+├── plugins/
+│   └── my-friends-claude/
+│       ├── .claude-plugin/plugin.json  # 플러그인 매니페스트
+│       ├── config/config.json          # 메시지 설정 (사용자 편집 대상)
+│       ├── styles/                     # Output Styles
+│       │   ├── friendly-korean.md
+│       │   ├── concise.md
+│       │   └── mentor.md
+│       ├── skills/                     # 슬래시 커맨드
+│       │   ├── set-style/SKILL.md
+│       │   ├── show-config/SKILL.md
+│       │   ├── set-message/SKILL.md
+│       │   └── status/SKILL.md
+│       ├── hooks/                      # Hook 스크립트
+│       │   ├── hooks.json
+│       │   ├── session-start.sh
+│       │   ├── prompt-submit.sh
+│       │   ├── stop.sh
+│       │   ├── pre-tool-use.sh
+│       │   └── notification.sh
+│       ├── scripts/                    # 유틸리티 스크립트
+│       │   ├── statusline.sh
+│       │   └── read-config.sh
+│       └── rules/CLAUDE.md            # 기본 행동 규칙
+├── LICENSE
+└── README.md
 ```
+
+## 삭제 (Uninstall)
+
+```
+/plugin uninstall my-friends-claude@my-friends-claude
+/plugin marketplace remove my-friends-claude
+```
+
+플러그인을 삭제하면 Claude Code는 원래 상태로 돌아갑니다.
 
 ## 의존성 (Dependencies)
 
