@@ -85,7 +85,7 @@ apply_spinner() {
     if [ "$has_spinner" = "true" ] && [ "$has_backup" = "false" ]; then
       # 현재 spinnerVerbs가 이미 우리가 적용한 것인지 확인
       local current_first
-      current_first=$(echo "$settings" | jq -r '.spinnerVerbs[0] // ""' 2>/dev/null || echo "")
+      current_first=$(echo "$settings" | jq -r '.spinnerVerbs.verbs[0] // .spinnerVerbs[0] // ""' 2>/dev/null || echo "")
       local our_first
       our_first=$(echo "$verbs_json" | jq -r '.[0] // ""' 2>/dev/null || echo "")
       if [ "$current_first" != "$our_first" ]; then
@@ -94,8 +94,8 @@ apply_spinner() {
       fi
     fi
 
-    # spinnerVerbs 적용
-    settings=$(echo "$settings" | jq --argjson verbs "$verbs_json" '.spinnerVerbs = $verbs')
+    # spinnerVerbs 적용 (object 형태: {mode, verbs})
+    settings=$(echo "$settings" | jq --argjson verbs "$verbs_json" '.spinnerVerbs = {"mode": "replace", "verbs": $verbs}')
     write_settings "$(echo "$settings" | jq .)"
   else
     python3 -c "
@@ -112,12 +112,19 @@ else:
 
 # 기존 spinnerVerbs가 있고 백업이 없으면 백업
 if 'spinnerVerbs' in settings and '_spinnerVerbs_backup' not in settings:
-    current = settings.get('spinnerVerbs', [])
-    if isinstance(current, list) and len(current) > 0 and len(verbs) > 0:
-        if current[0] != verbs[0]:
+    current = settings.get('spinnerVerbs', {})
+    # 기존 형식이 배열이든 객체이든 첫번째 verb 비교
+    if isinstance(current, dict):
+        current_verbs = current.get('verbs', [])
+    elif isinstance(current, list):
+        current_verbs = current
+    else:
+        current_verbs = []
+    if len(current_verbs) > 0 and len(verbs) > 0:
+        if current_verbs[0] != verbs[0]:
             settings['_spinnerVerbs_backup'] = current
 
-settings['spinnerVerbs'] = verbs
+settings['spinnerVerbs'] = {"mode": "replace", "verbs": verbs}
 
 os.makedirs(os.path.dirname(settings_path), exist_ok=True)
 with open(settings_path, 'w') as f:

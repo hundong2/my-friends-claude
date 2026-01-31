@@ -18,7 +18,7 @@ When this skill is invoked:
 2. Check if `spinnerVerbs.enabled` is `true`
 3. Read the user's `~/.claude/settings.json` (create if not exists)
 4. If `spinnerVerbs` key already exists in settings.json, back it up by saving the current value as `_spinnerVerbs_backup` in the same file
-5. Set `spinnerVerbs` in `~/.claude/settings.json` to the verbs array from config.json
+5. Set `spinnerVerbs` in `~/.claude/settings.json` to an object with `mode` and `verbs` keys
 6. Confirm: "스피너 동사가 커스터마이즈되었습니다! Claude Code를 재시작하면 적용됩니다."
 7. Show a few example verbs from the applied list
 
@@ -30,8 +30,9 @@ When this skill is invoked:
 4. Confirm: "스피너 동사가 원본으로 복원되었습니다! Claude Code를 재시작하면 적용됩니다."
 
 ### Important Notes
-- The `spinnerVerbs` setting in `~/.claude/settings.json` accepts a simple array of strings
-- Format: `"spinnerVerbs": ["verb1", "verb2", ...]`
+- The `spinnerVerbs` setting in `~/.claude/settings.json` accepts an object with `mode` and `verbs` keys
+- Format: `"spinnerVerbs": {"mode": "replace", "verbs": ["verb1", "verb2", ...]}`
+- `mode` can be `"replace"` (기본값 대체) or `"append"` (기본값에 추가)
 - Changes require a Claude Code restart to take effect
 - The `_original_mapping` field in config.json is documentation only — do NOT write it to settings.json
 - Only write the `verbs` array values to settings.json
